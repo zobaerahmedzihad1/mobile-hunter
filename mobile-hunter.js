@@ -1,5 +1,12 @@
+// search phone
+const searchField = document.getElementById("search-phones");
+// display phones
+const displayPhone = document.getElementById("phones");
+// single phone details
+const phoneDetails = document.getElementById("phone-details");
+
 const searchPhones = () => {
-  const searchField = document.getElementById("search-phones");
+  //   const searchField = document.getElementById("search-phones");
   const searchText = searchField.value;
   searchField.value = "";
 
@@ -11,8 +18,8 @@ const searchPhones = () => {
 };
 // Display all phones
 const displayPhones = (phones) => {
-  const Phones = document.getElementById("phones");
-  Phones.textContent = "";
+  //   const displayPhone = document.getElementById("phones");
+  displayPhone.textContent = "";
   phones.forEach((phone) => {
     //  console.log(phone);
     const { image, phone_name, slug, brand } = phone;
@@ -32,7 +39,7 @@ const displayPhones = (phones) => {
                </div>
           </div>
           `;
-    Phones.appendChild(div);
+    displayPhone.appendChild(div);
   });
 };
 
@@ -52,13 +59,13 @@ const displayPhonesDetails = (phone) => {
   // destucturing mainFeatures
   const { chipSet, displaySize, memory, sensors } = phone.mainFeatures;
 
-  const phoneDetails = document.getElementById("phone-details");
+  //   const phoneDetails = document.getElementById("phone-details");
   //   empty phone details
   phoneDetails.textContent = "";
   const div = document.createElement("div");
   div.classList.add("card");
   div.innerHTML = `
-  <div class="row g-0 ">
+  <div class="row g-0 bg-light rounded ">
        <div class="col-md-4 p-2">
          <img src="${image}" class="img-fluid rounded-start ps-5" alt="...">
          <h5 class="card-text p-1 mt-2 border border-2 text-center rounded border-info">${name} </p5>
@@ -82,12 +89,12 @@ const displayPhonesDetails = (phone) => {
   phoneDetails.appendChild(div);
 
   // sensor
-  const allSensor = phone.mainFeatures.sensors;
-  console.log(allSensor);
-  let sensorDiv = document.getElementById("sensor-container");
+  //   const allSensor = sensors;
+  //   console.log(allSensor);
+  const sensorDiv = document.getElementById("sensor-container");
 
-  for (const sensor of allSensor) {
-    let sensorText = document.createElement("li");
+  for (const sensor of sensors) {
+    const sensorText = document.createElement("li");
     sensorText.innerText = `${sensor}`;
     sensorDiv.appendChild(sensorText);
   }
