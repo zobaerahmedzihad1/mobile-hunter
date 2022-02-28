@@ -11,10 +11,11 @@ const searchPhones = () => {
 };
 // Display all phones
 const displayPhones = (phones) => {
+  const Phones = document.getElementById("phones");
+  Phones.textContent = "";
   phones.forEach((phone) => {
     //  console.log(phone);
     const { image, phone_name, slug, brand } = phone;
-    const Phones = document.getElementById("phones");
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
