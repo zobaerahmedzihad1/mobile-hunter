@@ -16,7 +16,37 @@
     <title>Mobile Hunter</title>
   </head>
   <body>
-    <h1>Mobile hunter</h1>
+    <!-- Search Input -->
+    <div class="input-group mb-3 w-50 mx-auto mt-5">
+      <input
+        id="search-phones"
+        type="text"
+        class="form-control"
+        placeholder="Search Your Favourite Phone"
+        aria-label="Recipient's username"
+        aria-describedby="button-addon2"
+      />
+      <button
+        onclick="searchPhones()"
+        class="btn btn-outline-info"
+        type="button"
+        id="search-button"
+      >
+        Search
+      </button>
+    </div>
+
+    <!-- single phone details -->
+    <div
+      id="phone-details"
+      class="card mb-6 mx-auto"
+      style="max-width: 800px"
+    ></div>
+
+    <!-- show all phones -->
+    <div class="container mt-5">
+      <div id="phones" class="row row-cols-1 row-cols-md-4 g-4"></div>
+    </div>
 
     <!-- External js -->
     <script src="./mobile-hunter.js"></script>
