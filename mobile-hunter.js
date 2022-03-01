@@ -1,3 +1,6 @@
+const error1 = document.getElementById("error1");
+const error2 = document.getElementById("error2");
+
 // search phone
 const searchField = document.getElementById("search-phones");
 // display phones
@@ -6,36 +9,49 @@ const displayPhone = document.getElementById("phones");
 const phoneDetails = document.getElementById("phone-details");
 
 const searchPhones = () => {
-  const searchText = searchField.value;
-  searchField.value = "";
+  if (searchField.value == "") {
+    error1.style.display = "block";
+    error2.innerText = "";
+    displayPhone.textContent = "";
+    return;
+  } else {
+    error1.style.display = "none";
+    error2.innerText = "";
+    const searchText = searchField.value;
 
-  const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-  //   console.log(url);
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => displayPhones(data.data));
+    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+    //   console.log(url);
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => displayPhones(data.data));
+  }
 };
 // Display all phones
 const displayPhones = (phones) => {
   displayPhone.textContent = "";
-  phones.forEach((phone) => {
-    //  console.log(phone);
-    const { image, phone_name, slug, brand } = phone;
-    const div = document.createElement("div");
-    div.classList.add("col");
-    div.innerHTML = `
-          <div class="card h-100">
-                  <img src="${image}" class="card-img-top p-4 bg-light" alt="...">
-              <div class="card-footer badge bg-info mb-2  text-dark mt-1">
-                  <h5 class="card-title text-center  text-uppercase">${phone_name}</h5>
-              </div>
-              <div class=" badge">
-                   <button onclick = "showPhoneDetails('${slug}')" type="button" class="btn btn-outline-info">Show Details</button>
-              </div>
-          </div>
-          `;
-    displayPhone.appendChild(div);
-  });
+  if (!(phones.length == 0)) {
+    phones.forEach((phone) => {
+      //  console.log(phone);
+      const { image, phone_name, slug, brand } = phone;
+      const div = document.createElement("div");
+      div.classList.add("col");
+      div.innerHTML = `
+            <div class="card h-100">
+                    <img src="${image}" class="card-img-top p-4 bg-light" alt="...">
+                <div class="card-footer badge bg-info mb-2  text-dark mt-1">
+                    <h5 class="card-title text-center  text-uppercase">${phone_name}</h5>
+                </div>
+                <div class=" badge">
+                     <button onclick = "showPhoneDetails('${slug}')" type="button" class="btn btn-outline-info">Show Details</button>
+                </div>
+            </div>
+            `;
+      displayPhone.appendChild(div);
+    });
+  } else {
+    error2.innerText = `No product found for "${searchField.value}" search result!`;
+  }
+  searchField.value = "";
 };
 
 const showPhoneDetails = (phoneId) => {
